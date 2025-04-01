@@ -1,0 +1,1 @@
+A dirty hack for generating some phone books for a hobby group SIP server from a Google sheet.
