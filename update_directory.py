@@ -10,6 +10,7 @@ with open('config.yaml') as file:
 
 sheetUrl = conf["sheet_url"]
 outpath = conf["output_path"]
+gs_outpath = conf["gs_output_path"]
 webroot = conf["webroot_url"]
 
 sheetDF = pd.read_csv(sheetUrl)
@@ -68,6 +69,32 @@ for j in range(numpages+1):
     f.write(t)
     f.close()
 
+# cisco 7965
+
+r=Element('CiscoIPPhoneMenu')
+c=SubElement(r,"Title")
+c.text="HamPY puhelinluettelo"
+c=SubElement(r,"Prompt")
+c.text="Valitse numero"
+for i in phonelist:
+    num=i[0]
+    name=i[1]
+    desc=i[2]
+    if type(desc)==str:
+        desc=f" ({desc})"
+    else:
+        desc=""
+    c=SubElement(r,"MenuItem")
+    cc=SubElement(c,"Name")
+    cc.text=f"{name}{desc}"
+    cc=SubElement(c,"URL")
+    cc.text=f"Dial:{num}"
+sr=minidom.parseString(tostring(r))
+t=sr.toprettyxml(indent="  ", encoding="UTF-8")
+f=open(f"{outpath}/directory_79x5.xml","wb")
+f.write(t)
+f.close()
+    
 # grandstream
 
 r=Element('AddressBook')
@@ -81,9 +108,9 @@ for i in phonelist:
       desc=""
   c=SubElement(r,"Contact")
   cc=SubElement(c,"LastName")
-  cc.text=name
-  cc=SubElement(c,"FirstName")
   cc.text=desc
+  cc=SubElement(c,"FirstName")
+  cc.text=name
   cc=SubElement(c,"Phone")
   ccc=SubElement(cc,"phonenumber")
   ccc.text=f"{num}"
@@ -95,6 +122,6 @@ for i in phonelist:
   
 r=minidom.parseString(tostring(r))
 t=r.toprettyxml(indent="  ")
-f=open(f"/{outpath}/gs_directory.xml","w")
+f=open(f"/{gs_outpath}/phonebook.xml","w")
 f.write(t)
 f.close()
