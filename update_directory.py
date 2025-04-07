@@ -31,11 +31,11 @@ for i in range(numpages+1):
     cc=SubElement(c,"Name")
     cc.text=f"Sivu {i+1}"
     cc=SubElement(c,"URL")
-    cc.text=f"{webroot}directory{i+1}.xml"
+    cc.text=f"{webroot}directory_79x0_{i+1}.xml"
     
 sr=minidom.parseString(tostring(r))
 t=sr.toprettyxml(indent="  ", encoding="ISO-8859-15")
-f=open(f"{outpath}/menu.xml","wb")
+f=open(f"{outpath}/directory_79x0.xml","wb")
 f.write(t)
 f.close()
 
@@ -65,7 +65,7 @@ for j in range(numpages+1):
 
     sr=minidom.parseString(tostring(r))
     t=sr.toprettyxml(indent="  ", encoding="ISO-8859-15")
-    f=open(f"{outpath}/directory{j+1}.xml","wb")
+    f=open(f"{outpath}/directory_79x0_{j+1}.xml","wb")
     f.write(t)
     f.close()
 
@@ -91,7 +91,7 @@ for i in phonelist:
     cc.text=f"Dial:{num}"
 sr=minidom.parseString(tostring(r))
 t=sr.toprettyxml(indent="  ", encoding="UTF-8")
-f=open(f"{outpath}/directory_79x5.xml","wb")
+f=open(f"{outpath}/directory.xml","wb")
 f.write(t)
 f.close()
     
@@ -122,6 +122,6 @@ for i in phonelist:
   
 r=minidom.parseString(tostring(r))
 t=r.toprettyxml(indent="  ")
-f=open(f"/{gs_outpath}/phonebook.xml","w")
+f=open(f"{gs_outpath}/phonebook.xml","w")
 f.write(t)
 f.close()
