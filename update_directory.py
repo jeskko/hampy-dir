@@ -53,6 +53,8 @@ for j in range(numpages+1):
         num=i[0]
         name=i[1]
         desc=i[2]
+        if type(num)!=str:
+            continue
         if type(desc)==str:
             desc=f" ({desc})"
         else:
@@ -80,6 +82,8 @@ for i in phonelist:
     num=i[0]
     name=i[1]
     desc=i[2]
+    if type(num)!=str:
+        continue
     if type(desc)==str:
         desc=f" ({desc})"
     else:
@@ -102,6 +106,8 @@ for i in phonelist:
   num=i[0]
   name=i[1]
   desc=i[2]
+  if type(num)!=str:
+      continue
   if type(desc)==str:
       desc=f"{desc}"
   else:
